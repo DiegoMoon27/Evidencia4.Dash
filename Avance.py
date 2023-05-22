@@ -122,7 +122,7 @@ fig3 = px.bar(df_causas, x='Causa', y='Count', color='Causa', title="Top 15 sini
 ### Dash
 app = dash.Dash(__name__)
 app.layout = html.Div([
-    html.H1("Avance Evidencia 4", style={'textAlign':'center','color':'#794AD9','font-family': 'Helvetica'}), # CSS
+    html.H1("Dash CNSF", style={'textAlign':'center','color':'#794AD9','font-family': 'Helvetica'}), # CSS
     html.Hr(),
     html.H3("Equipo 2"),
     html.P("A continuación mostraremos tres gráficos que consinten el avance corresponidente a la Evidencia 4."),
