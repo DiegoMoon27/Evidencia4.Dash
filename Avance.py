@@ -111,7 +111,8 @@ fig1 = px.bar(df_grouped, x='EDAD', y='POBLACION', color='SEXO', barmode='relati
 fig1.update_layout(title='Pirámide poblacional de edad y sexo', xaxis_title='Edad', yaxis_title='Población')
 
 ### Distribución por Entidad Federativa
-fig2 = px.histogram(df_comisiones, x="ENTIDAD", title="Distribución de Entidad Federativa")
+fig2 = px.histogram(df_comisiones, x="ENTIDAD", title="Distribución de Entidad Federativa",
+                    color="ENTIDAD")
 
 ### To 15 de siniestros 
 causas_count = df_siniestros["CAUSA DEL SINIESTRO"].value_counts().nlargest(15)
