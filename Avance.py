@@ -120,27 +120,62 @@ df_causas = pd.DataFrame({'Causa': causas_count.index, 'Count': causas_count.val
 fig3 = px.bar(df_causas, x='Causa', y='Count', color='Causa', title="Top 15 siniestros")
 
 ### Dash
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+
 app = dash.Dash(__name__)
-app.layout = html.Div([
-    html.H1("Dash CNSF", style={'textAlign':'center','color':'#794AD9','font-family': 'Helvetica'}), # CSS
-    html.Hr(),
-    html.H3("Equipo 2"),
-    html.P("A continuación mostraremos tres gráficos que consinten el avance corresponidente a la Evidencia 4."),
-    html.P("Empezamos con una gráfica en la que mostramos la población que hay por edad y por sexo:"),   
-    dcc.Graph(
-        id='graph_1',
-        figure=fig1
-    ),
-    html.P("Seguimos con una gráfica de distribución para ver las Entidades Federativas con mayor cantidad de asegurados, así como su cantidad:"),
-    dcc.Graph(
-        id="graph_2",
-        figure=fig2),
-    html.P("Terminamos este avance con una gráfica en la que mostramos el top 15 de siniestros:"),
-    dcc.Graph(
-        id="graph3",
-        figure= fig3
-    )
-])
+tab_style = {
+    'borderBottom': '1px solid #d6d6d6',
+    'padding': '10px',
+    'fontWeight': 'bold',
+    'backgroundColor': '#E6AA10',
+    'color': 'white'
+}
+
+selected_tab_style = {
+    'borderTop': '1px solid #d6d6d6',
+    'borderBottom': '1px solid #d6d6d6',
+    'backgroundColor': '#E6AA10',
+    'color': 'white',
+    'padding': '10px'
+}
+
+app.layout = html.Div(
+    style={'backgroundColor': '#F5A365', 'padding': '20px'},
+    children=[
+        html.H1("Dash CNSF", style={'textAlign': 'center', 'color': '#794AD9', 'font-family': 'Helvetica'}),
+        html.Hr(),
+        dcc.Tabs(
+            children=[
+                dcc.Tab(label='Pirámide poblacional', style=tab_style, selected_style=selected_tab_style, children=[
+                    html.H3("Equipo 2"),
+                    html.P("A continuación mostraremos tres gráficos que consinten el avance corresponidente a la Evidencia 4."),
+                    html.P("Empezamos con una gráfica en la que mostramos la población que hay por edad y por sexo:"),
+                    dcc.Graph(
+                        id='graph_1',
+                        figure=fig1
+                    )
+                ]),
+                dcc.Tab(label='Entidades Federativas', style=tab_style, selected_style=selected_tab_style, children=[
+                    html.P("Seguimos con una gráfica de distribución para ver las Entidades Federativas con mayor cantidad de asegurados, así como su cantidad:"),
+                    dcc.Graph(
+                        id="graph_2",
+                        figure=fig2
+                    )
+                ]),
+                dcc.Tab(label='Top 15 siniestros', style=tab_style, selected_style=selected_tab_style, children=[
+                    html.P("Terminamos este avance con una gráfica en la que mostramos el top 15 de siniestros:"),
+                    dcc.Graph(
+                        id="graph_3",
+                        figure=fig3
+                    )
+                ])
+            ],
+            style={'fontFamily': 'Helvetica', 'fontSize': '18px', 'width': '50%', 'margin': 'auto'}
+        )
+    ]
+)
 
 if __name__ == '__main__':
     app.run_server(debug=True)
